@@ -1,0 +1,24 @@
+//
+//  ViewRouter.swift
+//  courseWork
+//
+//  Created by alexander tsay on 12.02.2020.
+//  Copyright © 2020 alexander tsay. All rights reserved.
+//
+
+import Foundation
+import Combine
+import SwiftUI
+
+class ViewRouter: ObservableObject {
+    
+    let objectWillChange = PassthroughSubject<ViewRouter,Never>()
+    
+    @Published var currentPage: String = "login" {
+        willSet {
+            withAnimation() {
+              objectWillChange.send(self)
+            }
+        }
+    }
+}

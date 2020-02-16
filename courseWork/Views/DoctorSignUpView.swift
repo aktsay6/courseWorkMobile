@@ -1,0 +1,148 @@
+//
+//  DoctorSignUpView.swift
+//  courseWork
+//
+//  Created by alexander tsay on 11.02.2020.
+//  Copyright © 2020 alexander tsay. All rights reserved.
+//
+
+import SwiftUI
+
+struct DoctorSignUpView: View {
+    @EnvironmentObject var viewRouter: ViewRouter
+    
+    @State var username: String = ""
+    @State var password: String = ""
+    @State var repPas: String = ""
+    @State var name: String = ""
+    @State var lastName: String = ""
+    @State var job:String = ""
+    @State var invalidData = false
+    @State var notEqualPass = false
+    @State var weakPass = false
+    @State var usernameExist = false
+    
+    var body: some View {
+        Form {
+            VStack {
+                Group{
+                    Text("Are u a doctor?").font(.title)
+                    TextField("Enter your username", text: $username).padding().autocapitalization(.none)
+                    SecureField("Enter your password", text: $password).padding()
+                    SecureField("Confirm your password", text: $repPas).padding()
+                    TextField("Enter your first name", text: $name).padding()
+                    TextField("Enter your last name", text: $lastName).padding()
+                    TextField("Enter your job", text: $job).padding()
+                }
+                Group{
+                    if invalidData {
+                        Text("Invalid data entered").foregroundColor(.red)
+                    }
+                    if notEqualPass {
+                        Text("Passwords are not equal").foregroundColor(.red)
+                    }
+                    
+                    if weakPass{
+                        Text("Weak password").foregroundColor(.red)
+                    }
+                    if usernameExist{
+                        Text("This username is already used").foregroundColor(.red)
+                    }
+                }
+                
+            }
+            VStack {
+                Button(action: {
+                    if(!self.check()){
+                        self.invalidData = true
+                        self.notEqualPass = false
+                        self.weakPass = false
+                        self.usernameExist = false
+                    } else if (self.password != self.repPas){
+                        self.notEqualPass = true
+                        self.invalidData = false
+                        self.weakPass = false
+                        self.usernameExist = false
+                    }else if !self.checkPass(){
+                        self.weakPass = true
+                        self.notEqualPass = false
+                        self.invalidData = false
+                        self.usernameExist = false
+                    }
+                        
+                    else {
+                        let json: [String: Any] = ["username": self.username, "password": self.password, "name": self.name, "lastName": self.lastName, "job": self.job]
+                        let jsonData = try? JSONSerialization.data(withJSONObject: json, options: [])
+                        let url = URL(string: "http://localhost:8080/registration/doctor")!
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
+                        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+                        
+                        let task = URLSession.shared.uploadTask(with: request, from: jsonData){
+                            (data, response, error) in
+                            let httpResp = response as! HTTPURLResponse
+                            DispatchQueue.main.async {
+                                print(httpResp.statusCode)
+                                if httpResp.statusCode == 200 {
+                                    self.viewRouter.currentPage = "login"
+                                } else if httpResp.statusCode == 403{
+                                    self.usernameExist = true
+                                    self.weakPass = false
+                                    self.notEqualPass = false
+                                    self.invalidData = false
+                                }
+                            }
+                        }
+                        task.resume()
+                    }
+                }){
+                    SignUpButtonContent()
+                }
+            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+            VStack{
+                Button(action: {
+                    self.viewRouter.currentPage = "login"
+                }){
+                    BackButtonView()
+                }
+            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+        }
+    }
+    
+    func check() -> Bool {
+        
+        if self.username.isEmpty{
+            return false
+        }
+        if self.password.isEmpty{
+            return false
+        }
+        if self.repPas.isEmpty{
+            return false
+        }
+        if self.name.isEmpty{
+            return false
+        }
+        if self.lastName.isEmpty{
+            return false
+        }
+        if self.job.isEmpty{
+            return false
+        }
+        
+        return true
+    }
+    
+    func checkPass() -> Bool{
+        let pattern = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<,:;~`’]{8,}$"
+        let reg = NSPredicate(format: "SELF MATCHES %@", pattern).evaluate(with: self.password)
+        print(reg)
+        return reg
+    }
+}
+
+struct DoctorSignUpView_Previews: PreviewProvider {
+    static var previews: some View {
+        DoctorSignUpView().environmentObject(ViewRouter())
+    }
+}
