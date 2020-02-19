@@ -14,6 +14,7 @@ class ViewRouter: ObservableObject {
     
     let objectWillChange = PassthroughSubject<ViewRouter,Never>()
     
+    
     @Published var currentPage: String = "login" {
         willSet {
             withAnimation() {
@@ -21,4 +22,7 @@ class ViewRouter: ObservableObject {
             }
         }
     }
+    
+    @Published var role: String = "user"
+    public static var jwt: String = ""
 }

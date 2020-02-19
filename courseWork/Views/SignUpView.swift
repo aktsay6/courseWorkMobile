@@ -18,6 +18,8 @@ struct SignUpView: View {
     @State var notEqualPass = false
     @State var registered = false
     
+    @State var value : CGFloat = 0
+    
     var body: some View {
         VStack {
             Text("Sign Up").font(.title).padding()
@@ -70,6 +72,18 @@ struct SignUpView: View {
             }){
                 BackButtonView()
             }
+        }.offset(y: -self.value).animation(.spring()).onAppear(){
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
+                (noti) in
+                let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                let height = value.height
+                self.value = height / 3
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
+                (noti) in
+                self.value = 0
+            }
         }
     }
 }
@@ -96,11 +110,11 @@ struct SignUpView_Previews: PreviewProvider {
 struct BackButtonView: View {
     var body: some View {
         Text("BACK")
-        .font(.headline)
-        .foregroundColor(.white)
-        .padding()
-        .frame(width: 220, height: 60)
-        .background(Color.green)
-        .cornerRadius(15.0)
+            .font(.headline)
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 220, height: 60)
+            .background(Color.green)
+            .cornerRadius(15.0)
     }
 }

@@ -17,7 +17,7 @@ struct MotherView : View {
             if viewRouter.currentPage == "login" {
                 LoginView().transition(.scale)
             } else if viewRouter.currentPage == "main" {
-                MainView()
+                MainTabView()
                     .transition(.scale)
             } else if viewRouter.currentPage == "signup"{
                 SignUpTabBarView()

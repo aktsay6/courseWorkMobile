@@ -21,6 +21,7 @@ struct DoctorSignUpView: View {
     @State var notEqualPass = false
     @State var weakPass = false
     @State var usernameExist = false
+    @State var value : CGFloat = 0
     
     var body: some View {
         Form {
@@ -106,6 +107,18 @@ struct DoctorSignUpView: View {
                     BackButtonView()
                 }
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+        }.offset(y: -self.value).animation(.spring()).onAppear(){
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
+                (noti) in
+                let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                let height = value.height
+                self.value = height / 3
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
+                (noti) in
+                self.value = 0
+            }
         }
     }
     
