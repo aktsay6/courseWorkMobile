@@ -7,5 +7,6 @@ target 'courseWork' do
 
   # Pods for courseWork
   pod 'SwiftyJSON', '~> 4.0'
-
+  pod "StompClientLib"
 end
+

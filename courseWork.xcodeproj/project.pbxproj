@@ -23,6 +23,7 @@
 		3494920023F47174005B110A /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349491FF23F47174005B110A /* MotherView.swift */; };
 		34ABA1CA23FC1A7800211B9A /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABA1C923FC1A7800211B9A /* Doctor.swift */; };
 		34ABA1CC23FC1EF300211B9A /* DoctorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABA1CB23FC1EF300211B9A /* DoctorDetail.swift */; };
+		34ABA1E82403E26900211B9A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABA1E72403E26900211B9A /* LoginController.swift */; };
 		633AABF137B810352083835A /* Pods_courseWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE76E25A04F6982E4D4B27C6 /* Pods_courseWork.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		349491FF23F47174005B110A /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		34ABA1C923FC1A7800211B9A /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
 		34ABA1CB23FC1EF300211B9A /* DoctorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorDetail.swift; sourceTree = "<group>"; };
+		34ABA1E72403E26900211B9A /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		6A5C65CEFA789CBE655F24A1 /* Pods-courseWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-courseWork.release.xcconfig"; path = "Target Support Files/Pods-courseWork/Pods-courseWork.release.xcconfig"; sourceTree = "<group>"; };
 		AE1EEB6CC44E54A06AAFB6B4 /* Pods-courseWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-courseWork.debug.xcconfig"; path = "Target Support Files/Pods-courseWork/Pods-courseWork.debug.xcconfig"; sourceTree = "<group>"; };
 		DE76E25A04F6982E4D4B27C6 /* Pods_courseWork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_courseWork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				346A345723FC09C1000C3FF5 /* AdminView.swift */,
 				34ABA1C923FC1A7800211B9A /* Doctor.swift */,
 				34ABA1CB23FC1EF300211B9A /* DoctorDetail.swift */,
+				34ABA1E72403E26900211B9A /* LoginController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				3460D04323E04DEB00BFF923 /* LoginView.swift in Sources */,
 				349491FA23F2E1F3005B110A /* SignUpTabBarView.swift in Sources */,
 				346A345623FC08D5000C3FF5 /* MainTabView.swift in Sources */,
+				34ABA1E82403E26900211B9A /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

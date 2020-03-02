@@ -20,6 +20,8 @@ struct LoginView: View {
     @State var signingIn = false
     @State var authFailed = false
     
+    @State var login: LoginController = LoginController()
+    
     @EnvironmentObject var viewRouter : ViewRouter
     
     
@@ -38,6 +40,18 @@ struct LoginView: View {
                 if authFailed {
                     Text("No such user")
                         .foregroundColor(.red)
+                }
+                
+                Button(action: {
+                    self.login.doSome()
+                }){
+                    Text("IDI NA HUI EBUCII XCODE")
+                }
+                
+                Button(action:{
+                    self.login.disconnect()
+                }){
+                    Text("DISCONNECT")
                 }
                 
                 Button(action: {
