@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+
+class UserCredentials{
+    public var jwt: String = ""
+    public var userName: String = ""
+}

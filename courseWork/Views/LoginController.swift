@@ -8,8 +8,9 @@
 
 import Foundation
 import StompClientLib
+import SwiftyJSON
 
-class LoginController{
+class ChatController{
     
     init(){
         print("INITIALIZED")
@@ -23,14 +24,18 @@ class LoginController{
     var url: NSURL
     
     func doSome() {
+        var request = NSURLRequest(url: url as URL)
+        request.setValue("Bearer " + ViewRouter.creds.jwt, forKey: "Authorization")
         socket.openSocketWithURLRequest(request: NSURLRequest(url: url as URL), delegate: self)
     }
     func disconnect(){
-        socket.disconnect()
+        let message = JSON(["messageType":"CHAT", "content":"asdasd", "sender":"user"])
+        socket.sendMessage(message: message.rawString() ?? "def val", toDestination: "/app/chat/username/sendMessage", withHeaders: ["content-type" : "application/json"], withReceipt: nil)
+//        socket.disconnect()
     }
 }
 
-extension LoginController: StompClientLibDelegate{
+extension ChatController: StompClientLibDelegate{
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
         print(jsonBody)
     }
@@ -41,6 +46,7 @@ extension LoginController: StompClientLibDelegate{
     
     func stompClientDidConnect(client: StompClientLib!) {
         print("Client Connected")
+        socket.subscribe(destination: "/topic/username")
     }
     
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {

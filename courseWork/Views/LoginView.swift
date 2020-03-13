@@ -20,8 +20,6 @@ struct LoginView: View {
     @State var signingIn = false
     @State var authFailed = false
     
-    @State var login: LoginController = LoginController()
-    
     @EnvironmentObject var viewRouter : ViewRouter
     
     
@@ -43,18 +41,6 @@ struct LoginView: View {
                 }
                 
                 Button(action: {
-                    self.login.doSome()
-                }){
-                    Text("IDI NA HUI EBUCII XCODE")
-                }
-                
-                Button(action:{
-                    self.login.disconnect()
-                }){
-                    Text("DISCONNECT")
-                }
-                
-                Button(action: {
                     if self.username.isEmpty || self.password.isEmpty{
                         self.invalidData = true
                         self.authFailed = false
@@ -70,7 +56,6 @@ struct LoginView: View {
                         request.httpMethod = "POST"
                         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
                         
-                        
                         let task = URLSession.shared.uploadTask(with: request, from: jsonData){
                             (data, response, error) in
                             let json = JSON(data)
@@ -81,7 +66,8 @@ struct LoginView: View {
                             DispatchQueue.main.async {
                                 if httpResp.statusCode == 200 {
                                     self.viewRouter.currentPage = "main"
-                                    ViewRouter.jwt = jwt
+                                    ViewRouter.creds.jwt = jwt
+                                    ViewRouter.creds.userName = self.username
                                     self.viewRouter.role = role
                                     self.authFailed = false
                                 }else{

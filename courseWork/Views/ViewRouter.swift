@@ -14,6 +14,8 @@ class ViewRouter: ObservableObject {
     
     let objectWillChange = PassthroughSubject<ViewRouter,Never>()
     
+    @ObservedObject var chat = ChatController()
+    
     
     @Published var currentPage: String = "login" {
         willSet {
@@ -24,5 +26,5 @@ class ViewRouter: ObservableObject {
     }
     
     @Published var role: String = "user"
-    public static var jwt: String = ""
+    public static var creds: UserCredentials = UserCredentials()
 }

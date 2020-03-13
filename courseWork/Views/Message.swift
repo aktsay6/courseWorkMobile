@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+
+class Message : Identifiable{
+    var id = UUID()
+    var content: String
+    var sender: String
+    
+    init(){
+        content = "aaa"
+        sender = "aaa"
+    }
+    
+    init(content:String, sender:String){
+        self.content = content
+        self.sender = sender
+    }
+}

@@ -11,9 +11,21 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     var body: some View {
+        
         VStack {
-            Rectangle().fill(Color.red).frame(width:200, height: 200)
             Text("Welcome").font(.largeTitle)
+            Button(action: {
+                self.viewRouter.chat.room = ViewRouter.creds.userName
+                self.viewRouter.chat.connect()
+                self.viewRouter.currentPage = "chat"
+            }){
+                Text("Connect")
+            }
+            Button(action: {
+                self.viewRouter.chat.disconnect()
+            }){
+                Text("Disconnect")
+            }
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3408FB02241A5C8E00E9EDD5 /* DoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3408FB01241A5C8E00E9EDD5 /* DoctorView.swift */; };
 		3460D03F23E04DEB00BFF923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460D03E23E04DEB00BFF923 /* AppDelegate.swift */; };
 		3460D04123E04DEB00BFF923 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460D04023E04DEB00BFF923 /* SceneDelegate.swift */; };
 		3460D04323E04DEB00BFF923 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460D04223E04DEB00BFF923 /* LoginView.swift */; };
@@ -14,6 +15,11 @@
 		3460D04823E04DF100BFF923 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3460D04723E04DF100BFF923 /* Preview Assets.xcassets */; };
 		3460D04B23E04DF100BFF923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3460D04923E04DF100BFF923 /* LaunchScreen.storyboard */; };
 		3460D05623E09E0A00BFF923 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460D05523E09E0A00BFF923 /* SignUpView.swift */; };
+		346456AB241647740011E6E3 /* MultiSimConfig.txt in Resources */ = {isa = PBXBuildFile; fileRef = 346456AA241647740011E6E3 /* MultiSimConfig.txt */; };
+		346456AD241648AC0011E6E3 /* Script.sh in Resources */ = {isa = PBXBuildFile; fileRef = 346456AC241648230011E6E3 /* Script.sh */; };
+		346456B02417C8300011E6E3 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346456AF2417C8300011E6E3 /* ChatController.swift */; };
+		346456B22417C8AB0011E6E3 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346456B12417C8AB0011E6E3 /* ChatView.swift */; };
+		346456B42417C9000011E6E3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346456B32417C9000011E6E3 /* Message.swift */; };
 		346A345623FC08D5000C3FF5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346A345523FC08D5000C3FF5 /* MainTabView.swift */; };
 		346A345823FC09C1000C3FF5 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346A345723FC09C1000C3FF5 /* AdminView.swift */; };
 		349491F823F2E135005B110A /* DoctorSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349491F723F2E135005B110A /* DoctorSignUpView.swift */; };
@@ -23,11 +29,12 @@
 		3494920023F47174005B110A /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349491FF23F47174005B110A /* MotherView.swift */; };
 		34ABA1CA23FC1A7800211B9A /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABA1C923FC1A7800211B9A /* Doctor.swift */; };
 		34ABA1CC23FC1EF300211B9A /* DoctorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABA1CB23FC1EF300211B9A /* DoctorDetail.swift */; };
-		34ABA1E82403E26900211B9A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABA1E72403E26900211B9A /* LoginController.swift */; };
+		34ABA1EA241640AF00211B9A /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABA1E9241640AF00211B9A /* UserCredentials.swift */; };
 		633AABF137B810352083835A /* Pods_courseWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE76E25A04F6982E4D4B27C6 /* Pods_courseWork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3408FB01241A5C8E00E9EDD5 /* DoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorView.swift; sourceTree = "<group>"; };
 		3460D03B23E04DEB00BFF923 /* courseWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = courseWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3460D03E23E04DEB00BFF923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3460D04023E04DEB00BFF923 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +44,11 @@
 		3460D04A23E04DF100BFF923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3460D04C23E04DF100BFF923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3460D05523E09E0A00BFF923 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		346456AA241647740011E6E3 /* MultiSimConfig.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MultiSimConfig.txt; sourceTree = "<group>"; };
+		346456AC241648230011E6E3 /* Script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Script.sh; sourceTree = "<group>"; };
+		346456AF2417C8300011E6E3 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		346456B12417C8AB0011E6E3 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		346456B32417C9000011E6E3 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		346A345523FC08D5000C3FF5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		346A345723FC09C1000C3FF5 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		349491F723F2E135005B110A /* DoctorSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSignUpView.swift; sourceTree = "<group>"; };
@@ -46,7 +58,7 @@
 		349491FF23F47174005B110A /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		34ABA1C923FC1A7800211B9A /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
 		34ABA1CB23FC1EF300211B9A /* DoctorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorDetail.swift; sourceTree = "<group>"; };
-		34ABA1E72403E26900211B9A /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		34ABA1E9241640AF00211B9A /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		6A5C65CEFA789CBE655F24A1 /* Pods-courseWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-courseWork.release.xcconfig"; path = "Target Support Files/Pods-courseWork/Pods-courseWork.release.xcconfig"; sourceTree = "<group>"; };
 		AE1EEB6CC44E54A06AAFB6B4 /* Pods-courseWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-courseWork.debug.xcconfig"; path = "Target Support Files/Pods-courseWork/Pods-courseWork.debug.xcconfig"; sourceTree = "<group>"; };
 		DE76E25A04F6982E4D4B27C6 /* Pods_courseWork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_courseWork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +79,8 @@
 		3460D03223E04DEB00BFF923 = {
 			isa = PBXGroup;
 			children = (
+				346456AC241648230011E6E3 /* Script.sh */,
+				346456AA241647740011E6E3 /* MultiSimConfig.txt */,
 				3460D03D23E04DEB00BFF923 /* courseWork */,
 				3460D03C23E04DEB00BFF923 /* Products */,
 				39B9669A7F3F1B4DE6F1984F /* Pods */,
@@ -107,6 +121,7 @@
 		34CD9AE823E1C2F300156B59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				346456AF2417C8300011E6E3 /* ChatController.swift */,
 				3460D04223E04DEB00BFF923 /* LoginView.swift */,
 				3460D05523E09E0A00BFF923 /* SignUpView.swift */,
 				349491F723F2E135005B110A /* DoctorSignUpView.swift */,
@@ -118,7 +133,10 @@
 				346A345723FC09C1000C3FF5 /* AdminView.swift */,
 				34ABA1C923FC1A7800211B9A /* Doctor.swift */,
 				34ABA1CB23FC1EF300211B9A /* DoctorDetail.swift */,
-				34ABA1E72403E26900211B9A /* LoginController.swift */,
+				34ABA1E9241640AF00211B9A /* UserCredentials.swift */,
+				346456B12417C8AB0011E6E3 /* ChatView.swift */,
+				346456B32417C9000011E6E3 /* Message.swift */,
+				3408FB01241A5C8E00E9EDD5 /* DoctorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,6 +170,7 @@
 				3460D03823E04DEB00BFF923 /* Frameworks */,
 				3460D03923E04DEB00BFF923 /* Resources */,
 				4557CC351A8498A96301CBAC /* [CP] Embed Pods Frameworks */,
+				346456AE241648C20011E6E3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -202,13 +221,32 @@
 			files = (
 				3460D04B23E04DF100BFF923 /* LaunchScreen.storyboard in Resources */,
 				3460D04823E04DF100BFF923 /* Preview Assets.xcassets in Resources */,
+				346456AB241647740011E6E3 /* MultiSimConfig.txt in Resources */,
 				3460D04523E04DF100BFF923 /* Assets.xcassets in Resources */,
+				346456AD241648AC0011E6E3 /* Script.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		346456AE241648C20011E6E3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncustom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`\nif [ ! -z \"${custom_sim}\" ] && [ \"${TARGET_DEVICE_IDENTIFIER}\" = \"${custom_sim}\" ]; then\n  /bin/sh Script.sh\nfi\n";
+		};
 		4557CC351A8498A96301CBAC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +296,9 @@
 				3460D03F23E04DEB00BFF923 /* AppDelegate.swift in Sources */,
 				349491FC23F47021005B110A /* MainView.swift in Sources */,
 				34ABA1CA23FC1A7800211B9A /* Doctor.swift in Sources */,
+				346456B42417C9000011E6E3 /* Message.swift in Sources */,
+				346456B02417C8300011E6E3 /* ChatController.swift in Sources */,
+				346456B22417C8AB0011E6E3 /* ChatView.swift in Sources */,
 				346A345823FC09C1000C3FF5 /* AdminView.swift in Sources */,
 				34ABA1CC23FC1EF300211B9A /* DoctorDetail.swift in Sources */,
 				3460D05623E09E0A00BFF923 /* SignUpView.swift in Sources */,
@@ -268,7 +309,8 @@
 				3460D04323E04DEB00BFF923 /* LoginView.swift in Sources */,
 				349491FA23F2E1F3005B110A /* SignUpTabBarView.swift in Sources */,
 				346A345623FC08D5000C3FF5 /* MainTabView.swift in Sources */,
-				34ABA1E82403E26900211B9A /* LoginController.swift in Sources */,
+				34ABA1EA241640AF00211B9A /* UserCredentials.swift in Sources */,
+				3408FB02241A5C8E00E9EDD5 /* DoctorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

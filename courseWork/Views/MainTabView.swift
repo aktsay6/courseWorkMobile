@@ -26,6 +26,12 @@ struct MainTabView: View {
                     }
                 }
                 
+                if viewRouter.role == "ROLE_DOCTOR"{
+                    DoctorView(chat: viewRouter.chat).tabItem {
+                        Text("Doctor")
+                    }
+                }
+                
             }
         }
     }

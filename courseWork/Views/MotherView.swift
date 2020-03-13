@@ -23,6 +23,10 @@ struct MotherView : View {
                 SignUpTabBarView()
                     .transition(.scale)
             }
+            else if viewRouter.currentPage == "chat"{
+                ChatView(chat: viewRouter.chat)
+                    .transition(.scale)
+            }
         }
     }
 }

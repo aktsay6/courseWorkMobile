@@ -13,7 +13,7 @@ xcrun simctl shutdown all
 path=$(find ~/Library/Developer/Xcode/DerivedData/courseWork-*/Build/Products/Debug-iphonesimulator -name "courseWork.app" | head -n 1)
 echo "${path}"
 
-filename=${path_to_MultiSimConfig.txt}
+filename=MultiSimConfig.txt
 grep -v '^#' $filename | while read -r line
 do
   echo $line

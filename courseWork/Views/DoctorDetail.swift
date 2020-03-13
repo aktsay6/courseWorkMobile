@@ -28,7 +28,7 @@ struct DoctorDetail: View {
                 var request = URLRequest(url: url)
                 request.httpMethod = "PUT"
                 request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-                let str: String = "Bearer " + ViewRouter.jwt
+                let str: String = "Bearer " + ViewRouter.creds.jwt
                 request.setValue(str, forHTTPHeaderField: "Authorization")
                 
                 let task = URLSession.shared.dataTask(with: request){
