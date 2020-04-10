@@ -26,11 +26,15 @@ struct DoctorView: View {
                 request.setValue(str, forHTTPHeaderField: "Authorization")
                 let task = URLSession.shared.dataTask(with: request){
                     (data, response, error) in
-                    let httpResp = response as! HTTPURLResponse
-                    var a = (String(data: data!, encoding: String.Encoding.utf8))
-                    print(a)
+                    let resp : String? = (String(data: data!, encoding: String.Encoding.utf8))
                     DispatchQueue.main.async {
-                        
+                        if resp! != "none"{
+                            self.viewRouter.chat.room = resp!
+                            self.viewRouter.chat.connect()
+                            self.viewRouter.currentPage = "chat"
+                        }else{
+                            print(resp!)
+                        }
                     }
                 }
                 task.resume()

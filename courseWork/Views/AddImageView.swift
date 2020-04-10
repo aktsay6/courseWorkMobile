@@ -7,13 +7,22 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct AddImageView: View {
+    @State var image: Image?
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            image
+        }.onAppear(){
+            AF.download("http://localhost:8080/upload").responseData{ response in
+                if let data = response.value{
+                    self.image = Image(uiImage: (UIImage(data: data) ?? nil)!)
+                }
+            }
+        }
     }
 }
-
 struct AddImageView_Previews: PreviewProvider {
     static var previews: some View {
         AddImageView()

@@ -13,19 +13,32 @@ struct MainView: View {
     var body: some View {
         
         VStack {
+            HStack{
+                Button(action:{
+                    self.viewRouter.currentPage = "profile"
+                }){
+                    HStack {
+                        Image(systemName: "person.circle").foregroundColor(Color.black)
+                        Text("Profile").font(.headline).foregroundColor(.black)
+                    }.padding()
+                }.padding()
+                Spacer()
+            }
+            Spacer()
             Text("Welcome").font(.largeTitle)
             Button(action: {
                 self.viewRouter.chat.room = ViewRouter.creds.userName
                 self.viewRouter.chat.connect()
                 self.viewRouter.currentPage = "chat"
             }){
-                Text("Connect")
+                Text("Connect to chat")
             }
             Button(action: {
-                self.viewRouter.chat.disconnect()
+                self.viewRouter.currentPage = "bot"
             }){
-                Text("Disconnect")
+                Text("Check for heart diseases")
             }
+            Spacer()
         }
     }
 }

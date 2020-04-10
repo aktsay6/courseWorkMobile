@@ -31,9 +31,9 @@ class ChatController : ObservableObject{
     func disconnect(){
         socket.disconnect()
     }
-    func sendMessage(message : String, userName: String){
+    func sendMessage(message : String, userName: String, room: String){
         let message = JSON(["messageType":"CHAT", "content":message, "sender": userName])
-        socket.sendMessage(message: message.rawString() ?? "def val", toDestination: "/app/chat/" + userName + "/sendMessage", withHeaders: ["content-type" : "application/json"], withReceipt: nil)
+        socket.sendMessage(message: message.rawString() ?? "def val", toDestination: "/app/chat/" + room + "/sendMessage", withHeaders: ["content-type" : "application/json"], withReceipt: nil)
     }
     
 }
@@ -43,7 +43,8 @@ extension ChatController: StompClientLibDelegate{
         let json = JSON(jsonBody as Any)
         let sender = json["sender"].stringValue
         let content = json["content"].stringValue
-        let message = Message(content: content, sender: sender)
+        let type = json["type"].stringValue
+        let message = Message(content: content, sender: sender, type: type)
         msg.append(message)
         print(json)
         print(msg.count)
@@ -51,12 +52,13 @@ extension ChatController: StompClientLibDelegate{
     
     func stompClientDidDisconnect(client: StompClientLib!) {
         print("Client Disconnected")
+        socket.unsubscribe(destination: "/topic/" + room)
     }
     
     func stompClientDidConnect(client: StompClientLib!) {
         print("Client Connected")
         socket.subscribe(destination: "/topic/" + room)
-        let message = JSON(["messageType":"JOIN", "content":"null", "sender": room])
+        let message = JSON(["messageType":"JOIN", "content":"null", "sender": ViewRouter.creds.userName])
         socket.sendMessage(message: message.rawString() ?? "def val", toDestination: "/app/chat/" + room + "/addUser", withHeaders: ["content-type" : "application/json"], withReceipt: nil)
     }
     

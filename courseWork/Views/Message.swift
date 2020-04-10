@@ -13,14 +13,17 @@ class Message : Identifiable{
     var id = UUID()
     var content: String
     var sender: String
+    var type: String
     
     init(){
         content = "aaa"
         sender = "aaa"
+        type = "send"
     }
     
-    init(content:String, sender:String){
+    init(content:String, sender:String, type:String){
         self.content = content
         self.sender = sender
+        self.type = type
     }
 }

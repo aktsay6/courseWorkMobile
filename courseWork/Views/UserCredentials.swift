@@ -7,9 +7,10 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 class UserCredentials{
     public var jwt: String = ""
     public var userName: String = ""
+    public var image: Image? = nil
 }

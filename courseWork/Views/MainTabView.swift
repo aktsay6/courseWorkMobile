@@ -17,16 +17,13 @@ struct MainTabView: View {
             TabView {
                 MainView().tabItem{
                     Text("Main")
-                    
                 }
                 
                 if viewRouter.role == "ROLE_USER"{
                     AdminView().tabItem{
                         Text("Admin")
                     }
-                }
-                
-                if viewRouter.role == "ROLE_DOCTOR"{
+                }else if (viewRouter.role == "ROLE_DOCTOR"){
                     DoctorView(chat: viewRouter.chat).tabItem {
                         Text("Doctor")
                     }

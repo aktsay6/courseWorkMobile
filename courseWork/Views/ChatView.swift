@@ -14,6 +14,10 @@ struct ChatView: View {
     
     @ObservedObject var chat : ChatController
     
+    @State var mes:String = ""
+    
+    @State var showAlert = false
+    
     init(chat: ChatController){
         UITableView.appearance().separatorColor = .clear
         self.chat = chat
@@ -21,21 +25,52 @@ struct ChatView: View {
     
     var body: some View {
         VStack{
-            Text("CHAT")
+            HStack{
+                Button(action:{
+                    self.showAlert = true
+                }){
+                    Image(systemName: "arrowshape.turn.up.left").padding(10)
+                }
+                .alert(isPresented: $showAlert){ () -> Alert in
+                    Alert(title: Text("Warning"), message: Text("Do you want to end conversation?"), primaryButton: .default(Text("OK")){
+                        self.viewRouter.chat.disconnect()
+                        self.viewRouter.currentPage = "main"
+                        }, secondaryButton: .cancel())
+                }
+                Spacer()
+                Text("Chat").padding()
+                Spacer()
+            }.padding(7)
             List {
                 ForEach(chat.msg){ message in
+                    
                     if message.sender == ViewRouter.creds.userName {
                         MessageCell(message: message, selfMsg: true)
                     }else{
                         MessageCell(message: message, selfMsg: false)
                     }
+                    
                 }
             }
-            Button(action: {
-                self.viewRouter.chat.sendMessage(message: "asdasd", userName: ViewRouter.creds.userName)
-            }){
-                Text("Send")
-            }
+            HStack{
+                TextField(" Enter your message", text: $mes)
+                    .background(Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
+                    .cornerRadius(5)
+                    .padding(3)
+                Button(action: {
+                    if(self.mes != ""){
+                        if self.viewRouter.role == "ROLE_DOCTOR"{
+                            self.viewRouter.chat.sendMessage(message: self.mes, userName: ViewRouter.creds.userName, room: self.viewRouter.chat.room)
+                            self.mes = ""
+                        }else{
+                            self.viewRouter.chat.sendMessage(message: self.mes, userName: ViewRouter.creds.userName, room: ViewRouter.creds.userName)
+                            self.mes = ""
+                        }
+                    }
+                }){
+                    Image(systemName: "paperplane")
+                }.padding(10)
+            }.padding(5)
         }
     }
 }
@@ -51,21 +86,28 @@ struct MessageCell: View{
     var selfMsg = false
     var body: some View{
         HStack{
-            if selfMsg{
+            if message.type == "JOIN"{
                 Spacer()
-                Text(message.content)
-                    .padding(10)
-                    .foregroundColor(Color.white)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            else{
-                Text(message.content)
-                    .padding(10)
-                    .foregroundColor(Color.black)
-                    .background(Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
-                    .cornerRadius(10)
+                Text(message.sender + " joined chat").italic().padding(10)
+                Spacer()
+            }else{
+                if selfMsg{
+                    Spacer()
+                    Text(message.content)
+                        .padding(10)
+                        .foregroundColor(Color.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                else{
+                    Text(message.content)
+                        .padding(10)
+                        .foregroundColor(Color.black)
+                        .background(Color(UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
+                        .cornerRadius(10)
+                }
             }
         }
     }
 }
+

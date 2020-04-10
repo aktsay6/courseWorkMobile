@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftyJSON
+import Alamofire
 
 let lightGreyColor : Color = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
 
@@ -56,18 +57,27 @@ struct LoginView: View {
                         request.httpMethod = "POST"
                         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
                         
+                        
                         let task = URLSession.shared.uploadTask(with: request, from: jsonData){
                             (data, response, error) in
                             let json = JSON(data)
                             let jwt = json["jwt"].stringValue
                             let role = json["role"].stringValue
                             print(role)
-                            let httpResp = response as! HTTPURLResponse
+                            let httpResp = response as! HTTPURLResponse // Catch exception when server doesnt work
                             DispatchQueue.main.async {
                                 if httpResp.statusCode == 200 {
                                     self.viewRouter.currentPage = "main"
                                     ViewRouter.creds.jwt = jwt
                                     ViewRouter.creds.userName = self.username
+                                    AF.download("http://localhost:8080/upload?name=" + self.username).responseData{ response in
+                                        if let data = response.value{
+                                            let uiimage = UIImage(data: data) ?? nil
+                                            if uiimage != nil{
+                                                ViewRouter.creds.image = Image(uiImage: uiimage!)
+                                            }
+                                        }
+                                    }
                                     self.viewRouter.role = role
                                     self.authFailed = false
                                 }else{

@@ -27,6 +27,12 @@ struct MotherView : View {
                 ChatView(chat: viewRouter.chat)
                     .transition(.scale)
             }
+            else if viewRouter.currentPage == "bot"{
+                BotView().transition(.scale)
+            }
+            else if viewRouter.currentPage == "profile"{
+                ProfileView().transition(.slide)
+            }
         }
     }
 }
