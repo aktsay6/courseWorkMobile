@@ -16,6 +16,9 @@ struct AdminView: View {
     var body: some View {
         NavigationView {
             VStack{
+                HStack {
+                    Text("Doctor list").font(.title)
+                }
                 List(doctors){ doctor in
                     DoctorCell(update: self.$update, doctor: doctor)
                 }.onAppear(){
@@ -32,7 +35,7 @@ struct AdminView: View {
                         print("IN TASK")
                         let json = JSON(data)
                         for (_, subJson) : (String, JSON) in json{
-                            self.doctors.append(Doctor(name: subJson["name"].stringValue, lastName: subJson["lastName"].stringValue, job: subJson["job"].stringValue, username: subJson["username"].stringValue))
+                            self.doctors.append(Doctor(name: subJson["name"].stringValue, lastName: subJson["lastName"].stringValue, job: subJson["job"].stringValue, username: subJson["username"].stringValue, describe: subJson["describe"].stringValue, email: subJson["email"].stringValue, birthdate: String(subJson["birth"].stringValue.prefix(10))))
                         }
                     }.resume()
                 }
@@ -51,7 +54,7 @@ struct DoctorCell: View{
     @Binding var update:Bool
     let doctor: Doctor
     var body: some View{
-        return NavigationLink(destination: DoctorDetail(username: doctor.username, name: doctor.name, lastName: doctor.lastName, job: doctor.job, update: $update)){
+        return NavigationLink(destination: DoctorDetail(username: doctor.username, name: doctor.name, lastName: doctor.lastName, job: doctor.job, describe: doctor.describe, email: doctor.email, birthdate: doctor.birthdate,update: $update)){
             HStack{
                 Text(doctor.name).font(.title)
                 Text(doctor.lastName).font(.title)

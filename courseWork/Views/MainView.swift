@@ -25,19 +25,43 @@ struct MainView: View {
                 Spacer()
             }
             Spacer()
-            Text("Welcome").font(.largeTitle)
             Button(action: {
                 self.viewRouter.chat.room = ViewRouter.creds.userName
                 self.viewRouter.chat.connect()
                 self.viewRouter.currentPage = "chat"
             }){
+                Image(systemName: "bubble.left.and.bubble.right")
+                .font(.title)
                 Text("Connect to chat")
-            }
+            }.frame(minWidth: 0, maxWidth: .infinity)
+            .padding()
+            .foregroundColor(.white)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(.green), Color(.red)]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(40)
+            .padding(.horizontal, 20)
             Button(action: {
                 self.viewRouter.currentPage = "bot"
             }){
+                Image(systemName: "heart").font(.title)
                 Text("Check for heart diseases")
-            }
+            }.frame(minWidth: 0, maxWidth: .infinity)
+            .padding()
+            .foregroundColor(.white)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(.green), Color(.red)]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(40)
+            .padding(.horizontal, 20)
+            
+            Button(action: {
+                self.viewRouter.currentPage = "blank"
+            }){
+                Image(systemName: "square.and.pencil").font(.title)
+                Text("Fill in the blank")
+            }.frame(minWidth: 0, maxWidth: .infinity)
+            .padding()
+            .foregroundColor(.white)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(.green), Color(.red)]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(40)
+            .padding(.horizontal, 20)
             Spacer()
         }
     }

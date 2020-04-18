@@ -19,13 +19,16 @@ struct MainTabView: View {
                     Text("Main")
                 }
                 
-                if viewRouter.role == "ROLE_USER"{
+                if viewRouter.role == "ROLE_ADMIN"{
                     AdminView().tabItem{
-                        Text("Admin")
+                        Text("Doctor list")
                     }
                 }else if (viewRouter.role == "ROLE_DOCTOR"){
                     DoctorView(chat: viewRouter.chat).tabItem {
-                        Text("Doctor")
+                        Text("Help patient")
+                    }
+                    CheckBlanksView().tabItem{
+                        Text("Check blanks")
                     }
                 }
                 

@@ -12,5 +12,6 @@ import SwiftUI
 class UserCredentials{
     public var jwt: String = ""
     public var userName: String = ""
+    public var email: String = ""
     public var image: Image? = nil
 }

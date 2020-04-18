@@ -33,6 +33,9 @@ struct MotherView : View {
             else if viewRouter.currentPage == "profile"{
                 ProfileView().transition(.slide)
             }
+            else if viewRouter.currentPage == "blank"{
+                BlankView().transition(.scale)
+            }
         }
     }
 }

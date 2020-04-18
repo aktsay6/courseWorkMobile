@@ -13,6 +13,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var isVisible:Bool
     @Binding var image:Image?
+    var sourceType:Int
     
     func makeCoordinator() -> ImagePicker.Coordinator {
         Coordinator(isVisible: $isVisible, image: $image)
@@ -21,7 +22,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let vc = UIImagePickerController()
         vc.allowsEditing = true
-        vc.sourceType = .photoLibrary
+        vc.sourceType = sourceType == 1 ? .photoLibrary : .camera
         
         vc.delegate = context.coordinator
         
@@ -45,6 +46,8 @@ struct ImagePicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             let uiimage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
             image = Image(uiImage: uiimage)
+            
+            ViewRouter.creds.image = image
             
             let imgData = uiimage.jpegData(compressionQuality: 0.2)!
             

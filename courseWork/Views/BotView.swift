@@ -28,6 +28,7 @@ struct BotView_Previews: PreviewProvider {
 struct Question1 : View {
     @State var switchQ : Bool = false
     @State var age: String = "0"
+    @EnvironmentObject var viewRouter: ViewRouter
     var ans: HeartDisQuestions
     var body: some View {
         ZStack{
@@ -47,6 +48,12 @@ struct Question1 : View {
                     }){
                         Text("Apply")
                     }.buttonStyle(MyButtonStyle(color: .blue))
+                    Button(action:{
+
+                        self.viewRouter.currentPage = "main"
+                    }){
+                        Text("Back")
+                    }.buttonStyle(MyButtonStyle(color: .blue)).padding()
                 }.padding()
             }
         }

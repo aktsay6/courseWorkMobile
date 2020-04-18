@@ -16,6 +16,7 @@ struct ProfileView: View {
     @State var showActionSheet:Bool = false
     @State var showImagePicker:Bool = false
     @State var image:Image?
+    @State var sourceType:Int = 0
     
     var body: some View {
         ZStack {
@@ -29,6 +30,8 @@ struct ProfileView: View {
                             Text("Back")
                         }
                     }.padding()
+                    Spacer()
+                    Text("Profile").font(.largeTitle)
                     Spacer()
                 }
                 Spacer()
@@ -53,20 +56,24 @@ struct ProfileView: View {
                 }.actionSheet(isPresented: $showActionSheet, content: {() -> ActionSheet in
                     ActionSheet(title: Text("Selected Image"), message: Text("Please select an image from the image gallery or use the camera"), buttons: [
                         ActionSheet.Button.default(Text("Camera"),action: {
-                            
+                            self.sourceType = 0
+                            self.showImagePicker.toggle()
                         }),
                         ActionSheet.Button.default(Text("Photo Gallery"), action: {
+                            self.sourceType = 1
                             self.showImagePicker.toggle()
                         }),
                         ActionSheet.Button.cancel()
                     ])
                 })
-                Text(ViewRouter.creds.userName).font(.largeTitle).padding()
+                Text("Username: " + ViewRouter.creds.userName).font(.title).padding()
                 Text("Role: " + viewRouter.role.replacingOccurrences(of: "ROLE_", with: "").lowercased().capitalizingFirstLetter()).font(.title).padding()
+                Text("Email: " + ViewRouter.creds.email).font(.title).multilineTextAlignment(.center).padding()
                 Spacer()
                 Button(action:{
                     ViewRouter.creds.userName = ""
                     ViewRouter.creds.jwt = ""
+                    ViewRouter.creds.image = nil
                     self.viewRouter.currentPage = "login"
                 }){
                     Text("LOGOUT").foregroundColor(Color.red).padding()
@@ -75,7 +82,7 @@ struct ProfileView: View {
                 
             }.padding()
             if showImagePicker{
-                ImagePicker(isVisible: $showImagePicker, image: $image)
+                ImagePicker(isVisible: $showImagePicker, image: $image, sourceType: sourceType)
             }
         }.onAppear(){
             self.image = ViewRouter.creds.image

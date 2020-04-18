@@ -32,7 +32,35 @@ class ChatController : ObservableObject{
         socket.disconnect()
     }
     func sendMessage(message : String, userName: String, room: String){
-        let message = JSON(["messageType":"CHAT", "content":message, "sender": userName])
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        var mins, hours: String
+        if minutes < 10 {
+            mins = "0" + String(minutes)
+        }
+        else{
+            mins = String(minutes)
+        }
+        
+        if hour < 10 {
+            hours = "0" + String(hour)
+        }
+        else{
+            hours = String(hour)
+        }
+        
+        let message = JSON(["type":"CHAT", "content":message, "sender": userName, "time" : hours + ":" + mins])
+        socket.sendMessage(message: message.rawString() ?? "def val", toDestination: "/app/chat/" + room + "/sendMessage", withHeaders: ["content-type" : "application/json"], withReceipt: nil)
+    }
+    
+    func sendLeaveMessage(userName: String, room: String){
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        let message = JSON(["type":"LEAVE", "content":"", "sender": userName, "time" : String(hour) + ":" + String(minutes)])
         socket.sendMessage(message: message.rawString() ?? "def val", toDestination: "/app/chat/" + room + "/sendMessage", withHeaders: ["content-type" : "application/json"], withReceipt: nil)
     }
     
@@ -44,7 +72,15 @@ extension ChatController: StompClientLibDelegate{
         let sender = json["sender"].stringValue
         let content = json["content"].stringValue
         let type = json["type"].stringValue
-        let message = Message(content: content, sender: sender, type: type)
+        let time = json["time"].stringValue
+        var m_type = MessageType.JOIN
+        if type == "LEAVE"{
+            m_type = MessageType.LEAVE
+        }
+        else if type == "CHAT"{
+            m_type = MessageType.CHAT
+        }
+        let message = Message(content: content, sender: sender, type: m_type, time : time)
         msg.append(message)
         print(json)
         print(msg.count)
@@ -58,7 +94,7 @@ extension ChatController: StompClientLibDelegate{
     func stompClientDidConnect(client: StompClientLib!) {
         print("Client Connected")
         socket.subscribe(destination: "/topic/" + room)
-        let message = JSON(["messageType":"JOIN", "content":"null", "sender": ViewRouter.creds.userName])
+        let message = JSON(["messageType":"JOIN", "content":room, "sender": ViewRouter.creds.userName])
         socket.sendMessage(message: message.rawString() ?? "def val", toDestination: "/app/chat/" + room + "/addUser", withHeaders: ["content-type" : "application/json"], withReceipt: nil)
     }
     

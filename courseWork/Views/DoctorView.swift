@@ -16,6 +16,14 @@ struct DoctorView: View {
     
     var body: some View {
         VStack{
+            
+            Text("Here you can help a patient. Just tap a button and you will be connected to chat")
+                .fontWeight(.bold)
+                .font(.custom("Helvetica Neue", size: 30))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding()
+            
             Button(action:{
                 let url = URL(string: "http://localhost:8080/chat/doctorGetRoom")!
                 var request = URLRequest(url: url)
@@ -29,6 +37,7 @@ struct DoctorView: View {
                     let resp : String? = (String(data: data!, encoding: String.Encoding.utf8))
                     DispatchQueue.main.async {
                         if resp! != "none"{
+                            print("ASDASD   " + resp!)
                             self.viewRouter.chat.room = resp!
                             self.viewRouter.chat.connect()
                             self.viewRouter.currentPage = "chat"
@@ -39,8 +48,12 @@ struct DoctorView: View {
                 }
                 task.resume()
             }){
-                Text("Help patient!").font(.title)
-            }
+                Text("Join chat").font(.title)
+                    .foregroundColor(.white)
+                    .frame(width: 220, height: 60)
+                    .background(Color.green)
+                    .cornerRadius(15.0).lineLimit(2)
+                }.padding()
         }
     }
 }

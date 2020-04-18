@@ -28,7 +28,8 @@ struct LoginView: View {
         
         ZStack {
             VStack {
-                Text("Welcome!").bold().font(.title)
+                Image(systemName: "staroflife").font(.largeTitle)
+                Text("Smart Doctor").bold().font(.title)
                 UserNameField(username: $username)
                 PasswordField(password: $password)
                 if invalidData{
@@ -57,12 +58,12 @@ struct LoginView: View {
                         request.httpMethod = "POST"
                         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
                         
-                        
                         let task = URLSession.shared.uploadTask(with: request, from: jsonData){
                             (data, response, error) in
                             let json = JSON(data)
                             let jwt = json["jwt"].stringValue
                             let role = json["role"].stringValue
+                            let email = json["email"].stringValue
                             print(role)
                             let httpResp = response as! HTTPURLResponse // Catch exception when server doesnt work
                             DispatchQueue.main.async {
@@ -70,6 +71,7 @@ struct LoginView: View {
                                     self.viewRouter.currentPage = "main"
                                     ViewRouter.creds.jwt = jwt
                                     ViewRouter.creds.userName = self.username
+                                    ViewRouter.creds.email = email
                                     AF.download("http://localhost:8080/upload?name=" + self.username).responseData{ response in
                                         if let data = response.value{
                                             let uiimage = UIImage(data: data) ?? nil

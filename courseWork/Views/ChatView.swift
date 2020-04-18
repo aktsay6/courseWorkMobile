@@ -33,12 +33,14 @@ struct ChatView: View {
                 }
                 .alert(isPresented: $showAlert){ () -> Alert in
                     Alert(title: Text("Warning"), message: Text("Do you want to end conversation?"), primaryButton: .default(Text("OK")){
+                        self.chat.sendLeaveMessage(userName: ViewRouter.creds.userName, room: self.viewRouter.chat.room)
                         self.viewRouter.chat.disconnect()
                         self.viewRouter.currentPage = "main"
+                        self.chat.msg.removeAll()
                         }, secondaryButton: .cancel())
                 }
                 Spacer()
-                Text("Chat").padding()
+                Text("Chat").font(.title).padding()
                 Spacer()
             }.padding(7)
             List {
@@ -86,11 +88,17 @@ struct MessageCell: View{
     var selfMsg = false
     var body: some View{
         HStack{
-            if message.type == "JOIN"{
+            if message.type == MessageType.JOIN{
                 Spacer()
                 Text(message.sender + " joined chat").italic().padding(10)
                 Spacer()
-            }else{
+            }
+            else if message.type == MessageType.LEAVE{
+                Spacer()
+                Text(message.sender + " left chat").italic().padding(10)
+                Spacer()
+            }
+            else{
                 if selfMsg{
                     Spacer()
                     Text(message.content)
@@ -98,8 +106,10 @@ struct MessageCell: View{
                         .foregroundColor(Color.white)
                         .background(Color.blue)
                         .cornerRadius(10)
+                    Text(message.time)
                 }
                 else{
+                    Text(message.time)
                     Text(message.content)
                         .padding(10)
                         .foregroundColor(Color.black)
